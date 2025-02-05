@@ -7,7 +7,6 @@ plugins {
 android {
     namespace = "com.example.testapp"
     compileSdk = 35
-
     defaultConfig {
         applicationId = "com.example.testapp"
         minSdk = 24
@@ -26,6 +25,10 @@ android {
                 "proguard-rules.pro"
             )
         }
+    }
+
+    buildFeatures{
+        viewBinding = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -51,6 +54,10 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.runtime.ktx)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.camera.core)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.camera.lifecycle)
+    implementation(libs.androidx.camera.view)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

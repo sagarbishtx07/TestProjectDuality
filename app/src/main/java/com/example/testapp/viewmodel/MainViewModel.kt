@@ -3,9 +3,13 @@ package com.example.testapp.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.testapp.data.request.ForgotPasswordReq
+import com.example.testapp.data.request.ForgotVerifyOtpReq
 import com.example.testapp.data.request.LoginApiReq
 import com.example.testapp.data.request.RegistrationApiReq
 import com.example.testapp.data.request.SignUpReq
+import com.example.testapp.data.response.ForgotPasswordRes
+import com.example.testapp.data.response.ForgotVerifyOtpRes
 import com.example.testapp.data.response.LoginApiRes
 import com.example.testapp.data.response.RegistrationApiRes
 import com.example.testapp.data.response.SignUpApiRes
@@ -39,6 +43,14 @@ class MainViewModel(
 
     fun registerApi(request: RegistrationApiReq): MutableLiveData<RegistrationApiRes?> {
         return makeApiCall { repo.registrationApi(request) }
+    }
+
+    fun forgotPassword(request: ForgotPasswordReq): MutableLiveData<ForgotPasswordRes?> {
+        return makeApiCall { repo.forgotPassword(request) }
+    }
+
+    fun verifyOTP(request: ForgotVerifyOtpReq): MutableLiveData<ForgotVerifyOtpRes?> {
+        return makeApiCall { repo.verifyOTP(request) }
     }
 
 

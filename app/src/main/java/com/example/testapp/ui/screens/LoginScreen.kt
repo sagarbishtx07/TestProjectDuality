@@ -2,6 +2,7 @@ package com.example.testapp.ui.screens
 
 import android.content.Intent
 import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -70,6 +71,9 @@ fun LoginScreen(
                 .padding(20.dp)
                 .verticalScroll(rememberScrollState())
         ) {
+            Spacer(modifier = Modifier
+                .fillMaxHeight()
+                .weight(1f))
             Image(
                 painter = painterResource(R.drawable.appicon),
                 contentDescription = "Banner",
@@ -95,7 +99,9 @@ fun LoginScreen(
                 ),
                 color = Color.Black
             )
-
+            Spacer(modifier = Modifier
+                .fillMaxHeight()
+                .weight(1f))
             CustomTextField(
                 value = email,
                 onValueChange = { it ->
@@ -108,7 +114,8 @@ fun LoginScreen(
                 inputType = InputType.Email,
                 startIcon = painterResource(R.drawable.email),
                 isValid = {
-                    isValidEmail(it) }
+                    isValidEmail(it)
+                }
             )
             Spacer(modifier = Modifier.height(10.dp))
             CustomTextField(
@@ -127,7 +134,7 @@ fun LoginScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable {
-                        navController.navigate("forgot_password_screen")
+                        navController.navigate("forgot_password")
                     },
                 textAlign = TextAlign.End,
                 fontSize = 11.sp,
@@ -147,20 +154,24 @@ fun LoginScreen(
                 label = stringResource(R.string.login),
                 onClickAction = {
                     isLoading = true
-                    if (isValidEmail(email)&&password.isNotBlank()) {
+                    if (isValidEmail(email) && password.isNotBlank()) {
                         isError = false
                         loginApi(viewModel, email, password, navController) {
                             isLoading = false
-                            if(it!=null){
-                                if (it.status==200) {
-                                    prefs.saveStringValue("token",it.data.token)
-
+                            if (it != null) {
+                                if (it.status == 200) {
+                                    prefs.saveStringValue("token", it.data.token)
+                                    Toast.makeText(
+                                        navController.context,
+                                        "Login Successful",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                     //   navController.navigate("forgot_password_screen")
                                 } else {
                                     isError = true
                                     errorMessage = it.message
                                 }
-                            }else{
+                            } else {
                                 isError = true
                                 errorMessage = "Login Failed!! Check Email or Password!!"
                             }
@@ -246,7 +257,9 @@ fun LoginScreen(
                     }
                 )
             }
-            Spacer(modifier = Modifier.height(40.dp))
+            Spacer(modifier = Modifier
+                .fillMaxHeight()
+                .weight(1f))
             ProgressDialog(onDismissRequest = { isLoading = false }, isLoading = isLoading)
 
         }

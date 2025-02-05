@@ -13,8 +13,11 @@ import com.example.testapp.network.Api
 import com.example.testapp.network.RetrofitInstance
 import com.example.testapp.repo.MainRepo
 import com.example.testapp.ui.screens.CreateAccountScreen
+import com.example.testapp.ui.screens.ForgotPasswordScreen
 import com.example.testapp.ui.screens.LoginScreen
 import com.example.testapp.ui.screens.RegisterProfileScreen
+import com.example.testapp.ui.screens.SplashScreen
+import com.example.testapp.ui.screens.VerifyOtpScreen
 import com.example.testapp.ui.theme.TestAppTheme
 import com.example.testapp.utils.Preference
 import com.example.testapp.viewmodel.MainViewModel
@@ -39,8 +42,11 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(
                     navController = navController,
-                    startDestination = "login_screen"
+                    startDestination = "splash_screen"
                 ) {
+                    composable("splash_screen") {
+                        SplashScreen(navController)
+                    }
                     composable("login_screen") {
                         LoginScreen(navController, viewModel, prefs)
                     }
@@ -49,6 +55,12 @@ class MainActivity : ComponentActivity() {
                     }
                     composable("register_profile") {
                         RegisterProfileScreen(navController, viewModel, prefs)
+                    }
+                    composable("forgot_password") {
+                        ForgotPasswordScreen(navController, viewModel, prefs)
+                    }
+                    composable("verify_otp") {
+                        VerifyOtpScreen(navController, viewModel, prefs)
                     }
                 }
             }

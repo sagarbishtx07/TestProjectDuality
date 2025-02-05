@@ -73,6 +73,7 @@ fun CreateAccountScreen(
                 .padding(20.dp)
                 .verticalScroll(rememberScrollState())
         ) {
+            Spacer(modifier = Modifier.height(20.dp))
             Image(
                 painter = painterResource(R.drawable.appicon),
                 contentDescription = "Banner",
@@ -142,7 +143,7 @@ fun CreateAccountScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable {
-                        navController.navigate("forgot_password_screen")
+                        navController.navigate("forgot_password")
                     },
                 textAlign = TextAlign.End,
                 fontSize = 11.sp,
@@ -170,8 +171,8 @@ fun CreateAccountScreen(
                                 if (it.status == 200||it.status==201) {
                                     prefs.saveStringValue("token", it.data.accessToken)
                                     (navController.context as MainActivity).updateRetrofitInstance()
+                                    Toast.makeText(navController.context,"Account Created Successfully",Toast.LENGTH_SHORT).show()
                                     navController.navigate("register_profile")
-                                    Toast.makeText(navController.context,"Login Succesfull",Toast.LENGTH_SHORT).show()
                                 } else {
                                     isError = true
                                     errorMessage = "Something Went Wrong!! Please Retry"
