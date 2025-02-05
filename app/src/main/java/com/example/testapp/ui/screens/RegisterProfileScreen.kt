@@ -73,6 +73,7 @@ fun RegisterProfileScreen(
                 .padding(20.dp)
                 .verticalScroll(rememberScrollState())
         ) {
+            Spacer(modifier = Modifier.height(20.dp))
             Text(
                 stringResource(R.string.profile),
                 style = MaterialTheme.typography.headlineMedium.copy(
